@@ -1,4 +1,6 @@
-
+import numpy as np
+import matplotlib.pyplot as mlp
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def node_coors(dim, *args ):
@@ -149,4 +151,61 @@ def create_IEN(x_eles, *args):
     else:
         print('dimensions not accessible')
         return 'Error'
+
+
+def plot_nodes(coors):
+    a = type(coors[0]) is float
+    if a:
+        dim =1
+    else:
+        dim = len(coors[0])
+    if dim ==1:
+        x = []
+        for i in range(len(coors)):
+            x.append(coors[i])
+
+        x = np.array(x)
+        y = x*0
+        mlp.scatter(x, y)
+        mlp.show()
+
+    elif dim ==2:
+        x = []
+        y = []
+
+        for i in range(len(coors)):
+            x.append(coors[i][0])
+            y.append(coors[i][1])
+
+        x = np.array(x)
+        y = np.array(y)
+        mlp.scatter(x, y)
+        mlp.show()
+
+    elif dim == 3:
+        x = []
+        y = []
+        z = []
+        for i in range(len(coors)):
+            x.append(coors[i][0])
+            y.append(coors[i][1])
+            z.append(coors[i][2])
+        x = np.array(x)
+        y = np.array(y)
+        z = np.array(z)
+        fig = mlp.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(x,y,z,c='r', marker='o')
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+
+        mlp.show()
+
+    else:
+        print('Error wrong dimensions')
+
+
+
+
 
